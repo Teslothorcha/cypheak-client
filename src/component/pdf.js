@@ -28,7 +28,15 @@ class PdfGenerator extends Component {
         var fiveParArray = doc.splitTextToSize(text["fiveParagraph"], 570);
         var sixParArray = doc.splitTextToSize(text["sixParagraph"], 570);
         var sevenParArray = doc.splitTextToSize(text["sevenParagraph"], 570);
-        
+        var eigthParArray = doc.splitTextToSize(text["eigthParagraph"], 570);
+        var nineParArray = doc.splitTextToSize(text["nineParagraph"], 570);
+        var tenParArray = doc.splitTextToSize(text["tenParagraph"], 400);
+        var elevenParArray = doc.splitTextToSize(text["elevenParagraph"], 570);
+        var twelveParArray = doc.splitTextToSize(text["twelveParagraph"], 400);
+        var treceParArray = doc.splitTextToSize(text["treceParagraph"], 570);
+        var diezcuatroParArray = doc.splitTextToSize(text["diezcuatroParagraph"], 400);
+        var diezcincoParArray = doc.splitTextToSize(text["diezcincoParagraph"], 570);
+
         // phrases list
         var firstListone = doc.splitTextToSize(text["firstList"]["first"], 400);
         var firstListsecond = doc.splitTextToSize(text["firstList"]["second"], 400);
@@ -107,17 +115,56 @@ class PdfGenerator extends Component {
         //add page #3
         doc.addPage();
         // create table
-        var columns = ["Letter", "Name", "Symbol", "Pronunciation"];
-        var data = [
-            ["A - a", "a", "/a/", 'sounds like the a in father'],
-            ["B - b", "b{endNoun}", "/b/", "sounds like the b in bank"],
-            ["C - c", "c{endNoun}", "/ʦ/", "sounds like the ts in rats"] ];
-        doc.autoTable(columns,data,
+        doc.autoTable(text["column"],text["data"],
             { margin:{ top: 25 }}
             );
+        // add a title
+        doc.setFont('Helvetica', 'bold');
+        doc.text(280, 680, text["fourTitle"], {maxWidth: 530, align: "center"});
+        // return font to normal
+        doc.setFontSize(15);
+        doc.setFont('Helvetica', '');
+        doc.text(30, 720, eigthParArray, {maxWidth: 530, align: "justify"});
+
+
+        //add page #4
+        doc.addPage();
+        // add a title
+        doc.setFont('Helvetica', 'bold');
+        doc.text(280, 40, text["fiveTitle"], {maxWidth: 530, align: "center"});
+        // return font to normal
+        doc.setFontSize(15);
+        doc.setFont('Helvetica', '');
+        doc.text(30, 70, nineParArray, {maxWidth: 530, align: "justify"});
+        doc.text(50, 130, tenParArray, {maxWidth: 400, align: "justify"});
+        // add a title
+        doc.setFont('Helvetica', 'bold');
+        doc.text(280, 220, text["sixTitle"], {maxWidth: 530, align: "center"});
+        doc.setFontSize(13);
+        doc.text(100, 250, text["sevenTitle"], {maxWidth: 530, align: "right"});
+        // return font to normal
+        doc.setFontSize(15);
+        doc.setFont('Helvetica', '');
+        doc.text(30, 280, elevenParArray, {maxWidth: 530, align: "justify"});
+        doc.text(50, 450, twelveParArray, {maxWidth: 500, align: "justify"});
+        // add title
+        doc.setFont('Helvetica', 'bold');
+        doc.setFontSize(13);
+        doc.text(70, 550, text["eigthTitle"], {maxWidth: 530, align: "right"});
+        // return font to normal
+        doc.setFontSize(15);
+        doc.setFont('Helvetica', '');
+        doc.text(30, 590, treceParArray, {maxWidth: 530, align: "justify"});
+        doc.text(50, 690, diezcuatroParArray, {maxWidth: 600, align: "justify"});
         
+        //add page #5
+        doc.addPage();
+        doc.text(30, 50, diezcincoParArray, {maxWidth: 530, align: "justify"});
+
+
         //saves document
         doc.save('lanuague.pdf');
+
     }
 
     render() {
